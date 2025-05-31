@@ -1,32 +1,32 @@
-name: Deploy Portfolio via Github Pages
+name: Deploy Portfolio via GitHub Pages
 
 on:
-   workflow_dispatch:
-   push:
-        branches:
-            - main
+  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
-    build_and_deploy:
-            runs-on: ubuntu-latest
-        
-            steps:
-                - name: Checkout repository
-                  uses: actions/checkout@v3
+  build_and_deploy:
+    runs-on: ubuntu-latest
 
-                - name: Set up Node.js
-                  uses: action/setup-node@v3
-                  with:
-                     node-version: '18'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+    
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
 
-                - name: Intall dependencies
-                  run: npm install
-                - name: Build project
-                  run: npm run build
+      - name: Install dependencies
+        run: npm install
+      - name: Build project
+        run: npm run build
 
-                - name: Deploy to Github Pages
-                  uses: peacceiris/action-gh-pages@v3
-                  with: 
-                    github_token: ${{ secrets.GITHUB_TOKEN }}
-                    publish_dir: ./dist
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
 
