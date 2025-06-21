@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import ChatBubble from "./ChatBubble.jsx"
-
+import useSound from "use-sound";
+import ping from "../assets/ping.mp3"
 
 const Text= ()=>{
     console.log("Text is getting called")
@@ -13,11 +14,13 @@ const things = [
   ];
 
   const [visible, setVisible] = useState(0);
+  const [play] = useSound(ping);
 
   useEffect(() => {
   if (visible < things.length) {
     const timeout = setTimeout(() => {
       setVisible(prev => prev + 1);
+      play();
     }, 1000);
     return () => clearTimeout(timeout);
   }
