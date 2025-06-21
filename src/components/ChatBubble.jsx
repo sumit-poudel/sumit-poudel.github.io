@@ -2,9 +2,9 @@ import * as motion from "motion/react-client";
 import user from "../assets/user-circles-set.png";
 import { AnimatePresence } from "motion/react";
 
-export const ChatBubble = ({ text }) => {
+const ChatBubble = ({ text }) => {
   return (
-    <div className="flex flex-col w-full relative h-fit ">
+    <div className="flex flex-col w-fit relative h-fit ">
       <AnimatePresence>
         <motion.div
           className="flex items-center gap-2 my-5"
@@ -41,3 +41,5 @@ export const ChatBubble = ({ text }) => {
     </div>
   );
 };
+
+export default ChatBubble
