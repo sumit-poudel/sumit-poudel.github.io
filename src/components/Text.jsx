@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import ChatBubble from "./ChatBubble.jsx"
-import useSound from "use-sound";
-import ping from "../assets/ping.mp3"
 
 
 const Text= ()=>{
@@ -14,15 +12,13 @@ const things = [
     "Penguins hate me T_T"
   ];
 
-  const [play] = useSound(ping);
   const [visible, setVisible] = useState(0);
 
   useEffect(() => {
   if (visible < things.length) {
     const timeout = setTimeout(() => {
       setVisible(prev => prev + 1);
-      play();
-    }, 2000);
+    }, 1000);
     return () => clearTimeout(timeout);
   }
 }, [visible]);
