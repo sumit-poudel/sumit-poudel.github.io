@@ -1,7 +1,5 @@
 import send from "../assets/send.png"
-
-
-const Sender=({vayoRa,press})=>{
+const Sender=()=>{
 
     return <>
       <div className="flex  items-center gap-4 absolute bottom-1.5 inset-x-3 " >

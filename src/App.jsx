@@ -1,13 +1,17 @@
 import Sender from "./components/Sender.jsx";
 import Text from "./components/Text.jsx";
-import { useState } from "react";
+import Top from "./components/Top.jsx";
+
 
 const App = () => {
 
   return (
-    <div className="bg-white dark:bg-neutral-800 p-8 h-screen relative">
+    <div className="bg-white dark:bg-neutral-800 h-screen flex flex-col ">
+      <Top  />
+      <div className="px-8 relative basis-37/40 ">
       <Sender/>
       <Text />
+      </div>
     </div>
   );
 };
