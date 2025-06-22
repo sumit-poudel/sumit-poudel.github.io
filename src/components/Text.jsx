@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import ChatBubble from "./ChatBubble.jsx";
 import useSound from "use-sound";
 import ping from "../assets/ping.mp3";
+import Loading from "./Loading.jsx";
 
 const Text = () => {
   const things = [
@@ -30,6 +31,9 @@ const Text = () => {
       {things.slice(0, visible).map((text, index) => (
         <ChatBubble text={text} key={index} />
       ))}
+      {
+        <ChatBubble text={<Loading />} />
+      }
     </>
   );
 };
