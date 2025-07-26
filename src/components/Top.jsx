@@ -1,4 +1,4 @@
-import logo from "../assets/user-circles-set.png";
+import logo from "/logo.png";
 import * as motion from "motion/react-client";
 
 const Top = () => {
@@ -22,7 +22,7 @@ const Top = () => {
             rel="noopener noreferrer"
             className="flex items-center gap-2"
           >
-            <img src={logo} className="w-10 h-10" />
+            <img src={logo} className="w-10 h-10 rounded-full " />
             <h1 className="dark:text-white">Sumit Poudel</h1>
           </a>
         }
@@ -32,4 +32,3 @@ const Top = () => {
 };
 
 export default Top;
-
