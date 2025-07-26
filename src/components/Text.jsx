@@ -13,8 +13,19 @@ const Text = () => {
     "Penguins hate me T_T",
   ];
 
+  const mail = (
+    <a
+      href="mailto:sumitpoudel325@gmail.com"
+      target="_blank"
+      rel="noopener noreferrer"
+      className=" underline font-bold "
+    >
+      mail me
+    </a>
+  );
   const [visible, setVisible] = useState(0);
   const [play] = useSound(ping);
+  console.log(visible);
 
   useEffect(() => {
     if (visible < things.length) {
@@ -31,9 +42,8 @@ const Text = () => {
       {things.slice(0, visible).map((text, index) => (
         <ChatBubble text={text} key={index} />
       ))}
-      {
-        <ChatBubble text={<Loading />} />
-      }
+      {visible == things.length ? <ChatBubble text={mail} /> : null}
+      <ChatBubble text={<Loading />} />
     </>
   );
 };
