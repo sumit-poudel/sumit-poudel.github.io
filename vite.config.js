@@ -5,7 +5,10 @@ import Sitemap from "vite-plugin-sitemap"
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [tailwindcss(),react(),Sitemap({hostname: 'https://sumit-poudel.com.np'})],
+  plugins: [tailwindcss(), react(), Sitemap({ hostname: 'https://sumit-poudel.com.np' })],
+  define: {
+    global: {},
+  },
   server: {
     open: true,
     port: 3000,
