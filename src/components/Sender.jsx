@@ -37,8 +37,8 @@ const Sender = () => {
 
   return <>
     <div className="flex  items-center gap-4 absolute bottom-1.5 inset-x-3 " >
-      <input onChange={e => setMessage(e.target.value)} name="input" placeholder="Aa Send some texts" autoFocus className=" z-10 text-black dark:text-white w-full bg-gray-300 dark:bg-neutral-700 rounded-full h-7 pl-4 focus:outline-none " ></input>
-      <button onClick={sending} ><img src={send} className="z-10 w-6 h-6 opacity-70 hover:opacity-100 " /></button>
+      <input onChange={e => setMessage(e.target.value)} name="input" placeholder="Aa Send some texts" autoFocus className=" z-10 text-black dark:text-white w-full bg-gray-300 dark:bg-neutral-700 rounded-full h-9 pl-4 focus:outline-none " ></input>
+      <button onClick={sending} ><img src={send} className="z-10 w-8 h-8 opacity-70 hover:opacity-100 " /></button>
     </div>
   </>
 
