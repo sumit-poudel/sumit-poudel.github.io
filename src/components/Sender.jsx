@@ -3,7 +3,7 @@ import send from "../assets/send.png"
 import emailjs from '@emailjs/react-native'
 
 const Sender = () => {
-  const serviceid = import.meta.env.VITE_APP_SERVICE_ID
+  const serviceid = import.meta.env.VITE_SERVICE_ID
   const templateid = import.meta.env.VITE_TEMPLATE_ID
   const publickey = import.meta.env.VITE_PUBLIC_KEY
   const [messages, setMessage] = useState("");
