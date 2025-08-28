@@ -14,7 +14,7 @@ const Sender = () => {
       message: messages
     }
     if (messages.length > 0) {
-      const verify = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      const verify = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       if (verify.test(tempateParams.name)) {
         emailjs.send(serviceid, templateid, tempateParams,
           {
@@ -35,7 +35,7 @@ const Sender = () => {
 
   return <>
     <div className="flex  items-center gap-4 absolute bottom-1.5 inset-x-3 " >
-      <input onChange={e => setMessage(e.target.value)} name="input" placeholder="Aa Send some texts" autoFocus className=" z-10 text-black dark:text-white w-full bg-gray-300 dark:bg-neutral-700 rounded-full h-9 pl-4 focus:outline-none " ></input>
+      <input value={messages} onChange={e => setMessage(e.target.value)} name="input" placeholder="Aa Send some texts" autoFocus className=" z-10 text-black dark:text-white w-full bg-gray-300 dark:bg-neutral-700 rounded-full h-9 pl-4 focus:outline-none " ></input>
       <button onClick={sending} ><img src={send} className="z-10 w-8 h-8 opacity-70 hover:opacity-100 " /></button>
     </div>
   </>
