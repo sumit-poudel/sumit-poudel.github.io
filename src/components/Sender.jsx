@@ -5,10 +5,8 @@ import emailjs from '@emailjs/react-native'
 const Sender = () => {
   const serviceid = import.meta.env.VITE_APP_SERVICE_ID
   const templateid = import.meta.env.VITE_TEMPLATE_ID
-  const publicid = import.meta.env.VITE_PUBLIC_ID
-  console.log(serviceid);
+  const publickey = import.meta.env.VITE_PUBLIC_KEY
   const [messages, setMessage] = useState("");
-  console.log(messages);
 
   function sending() {
     const tempateParams = {
@@ -18,13 +16,12 @@ const Sender = () => {
     if (messages.length > 0) {
       const verify = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       if (verify.test(tempateParams.name)) {
-        emailjs.send('service_l3l0w5u', 'template_gzjvm2n', tempateParams,
+        emailjs.send(serviceid, templateid, tempateParams,
           {
-            publicKey: 'ut-OoYr0wjQgF3V7X'
+            publicKey: publickey
           }).then(
-            (response) => {
+            () => {
               alert("message send");
-              setMessage("");
             },
             (err) => {
               alert("error occured" + err);
@@ -33,6 +30,7 @@ const Sender = () => {
       } else alert("enter valid email");
     }
     else alert("write something first")
+    setMessage(" ");
   }
 
   return <>
