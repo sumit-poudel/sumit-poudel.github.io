@@ -1,46 +1,20 @@
 ---
-import clsx from "clsx";
 import type { CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
-import H1 from "../../components/h1.astro";
-import { formatDate } from "../../lib/utils";
 import InfoLayout from "../../layouts/InfoLayout.astro";
+import BlogCat from "../../components/blogCat";
 
 const articles: CollectionEntry<"blog">[] = (await getCollection("blog")).sort(
   (a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
     b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 )
+const categories = Array.from(
+  new Set(articles.map((article) => article.data.category))
+).sort();
 
 ---
 
 <InfoLayout>
-    <div class="p-4 sm:pt-8 sm:px-12 pb-20 min-h-dvh">
-        <H1> Blog </H1>
-
-        <ul class="mt-4 space-y-6">
-            <!-- posts -->
-              {
-                articles.map((article) => (
-                    <li>
-                        <a
-                            class="space-y-1 group"
-                            href={`/blog/${article.data.slug}`}
-                        >
-                            <h2 class="text-xl xl:text-2xl text-zinc-300 group-hover:text-white text-balance font-medium underline group-hover:underline-offset-2 decoration-transparent group-hover:decoration-zinc-500">
-                                {article.data.title}
-                            </h2>
-                            <p class="text-base text-zinc-400">
-                                {article.data.snippet}
-                            </p>
-                            <p class="text-sm text-zinc-500">
-                                {formatDate(article.data.pubDate)} &middot;{" "}
-                                {article.data.author}
-                            </p>
-                        </a>
-                    </li>
-                ))
-            }
-        </ul>
-    </div>
+    <BlogCat categories ={categories} articles={articles} client:load />
 </InfoLayout>
 

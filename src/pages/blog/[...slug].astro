@@ -6,7 +6,6 @@ import Prose from "../../components/prose.astro";
 import InfoLayout from "../../layouts/InfoLayout.astro";
 import { render } from "astro:content";
 
-export const prerender = true;
 export async function getStaticPaths() {
   const articles = await getCollection("blog")
   return articles.map((article: any) => ({
@@ -18,7 +17,7 @@ export async function getStaticPaths() {
 const {article} = Astro.props as { article: CollectionEntry<"blog"> };
 const { Content } = await render(article);
 ---
-<InfoLayout title={article.data.title} frontmatter={article.data}>
+<InfoLayout title={article.data.title} frontmatter={article.data} >
     <section class="p-4 sm:pt-8 sm:px-12 pb-20 min-h-dvh">
         <Prose>
             <Content />
@@ -29,7 +28,7 @@ const { Content } = await render(article);
             <a href={article.data.originalLink} target="_blank" class="underline underline-offset-4 decoration-zinc-100 hover:decoration-white hover:text-white">
                 {article.data.title}
             </a>
-            article. I highly recommend you give it a read!
+            repo. Check out the original for more details.
         </p>
 
     </section>
