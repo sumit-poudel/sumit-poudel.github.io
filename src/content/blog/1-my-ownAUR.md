@@ -6,7 +6,7 @@ slug: owte-appimage
 author: sumit 
 category: repo
 readingDuration: 1
-pubDate: 2025 9 25
+pubDate: 2025-9-25
 coverAlt: Anime girl dancing on screen.
 originalLink: https://github.com/sumit-poudel/oWtE
 cover: https://en.wikipedia.org/wiki/Ui_Shigure#/media/File:Ui_Shigure.jpg

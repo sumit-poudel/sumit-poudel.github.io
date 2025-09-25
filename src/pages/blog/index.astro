@@ -1,24 +1,17 @@
 ---
 import clsx from "clsx";
-import { actions } from "astro:actions";
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
 import H1 from "../../components/h1.astro";
 import { formatDate } from "../../lib/utils";
 import InfoLayout from "../../layouts/InfoLayout.astro";
 
-const categoriesResult = await Astro.callAction(actions.categories.getCategories, null);
-const categories = categoriesResult?.data?.categories || [];
-
+const articles: CollectionEntry<"blog">[] = (await getCollection("blog")).sort(
+  (a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
+    b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+)
+const categories = Array.from(new Set(articles.map((article) => article.data.category)));
 const selectedCategory = Astro.url.searchParams.get("category") || "all";
-
-const articlesResult = await Astro.callAction(actions.categories.filterByCategory, {
-    category: selectedCategory,
-});
-
-if (articlesResult?.error) {
-    console.log("error", articlesResult.error);
-}
-
-const articles = articlesResult?.data?.articles || [];
 ---
 
 <InfoLayout>
@@ -30,11 +23,11 @@ const articles = articlesResult?.data?.articles || [];
                 <a href="/blog" class={clsx("w-fit px-4 py-1 text-sm bg-transparent rounded-full transition-all duration-300 ease-in-out",
                     selectedCategory === "all" ? "text-white bg-zinc-100/20 outline-2 outline-offset-2 outline-zinc-100/20" : "text-zinc-400 hover:text-zinc-300"
                 )}>
-                    All
+                All
                 </a>
             </li>
-
-            {
+             <!-- category -->
+             {
                 categories.map((category) => (
                     <li>
                         <a
@@ -51,7 +44,8 @@ const articles = articlesResult?.data?.articles || [];
         </ul>
 
         <ul class="mt-4 space-y-6">
-            {
+            <!-- posts -->
+              {
                 articles.map((article) => (
                     <li>
                         <a
@@ -75,3 +69,4 @@ const articles = articlesResult?.data?.articles || [];
         </ul>
     </div>
 </InfoLayout>
+
