@@ -10,38 +10,12 @@ const articles: CollectionEntry<"blog">[] = (await getCollection("blog")).sort(
   (a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
     b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 )
-const categories = Array.from(new Set(articles.map((article) => article.data.category)));
-const selectedCategory = Astro.url.searchParams.get("category") || "all";
+
 ---
 
 <InfoLayout>
     <div class="p-4 sm:pt-8 sm:px-12 pb-20 min-h-dvh">
         <H1> Blog </H1>
-
-        <ul class="mt-4 flex items-center gap-4">
-            <li>
-                <a href="/blog" class={clsx("w-fit px-4 py-1 text-sm bg-transparent rounded-full transition-all duration-300 ease-in-out",
-                    selectedCategory === "all" ? "text-white bg-zinc-100/20 outline-2 outline-offset-2 outline-zinc-100/20" : "text-zinc-400 hover:text-zinc-300"
-                )}>
-                All
-                </a>
-            </li>
-             <!-- category -->
-             {
-                categories.map((category) => (
-                    <li>
-                        <a
-                            href={`/blog?category=${category.toLowerCase()}`}
-                            class={clsx("w-fit px-4 py-1 text-sm bg-transparent rounded-full transition-all duration-300 ease-in-out",
-                                selectedCategory === category.toLowerCase() ? "text-white bg-zinc-100/20 outline-2 outline-offset-2 outline-zinc-100/20" : "text-zinc-400 hover:text-zinc-200"
-                            )}
-                        >
-                            {category}
-                        </a>
-                    </li>
-                ))
-            }
-        </ul>
 
         <ul class="mt-4 space-y-6">
             <!-- posts -->

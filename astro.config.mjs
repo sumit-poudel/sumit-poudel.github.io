@@ -8,6 +8,7 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://sumit-poudel.com.np',
+  trailingSlash: "never",
    output: 'static',
   vite: {
     plugins: [tailwindcss()]
