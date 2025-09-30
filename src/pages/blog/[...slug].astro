@@ -16,8 +16,9 @@ export async function getStaticPaths() {
 
 const {article} = Astro.props as { article: CollectionEntry<"blog"> };
 const { Content } = await render(article);
+const cononical = "https://sumitpoudel.com/blog/" + article.data.slug;
 ---
-<InfoLayout title={article.data.title} frontmatter={article.data} >
+<InfoLayout title={article.data.title +" | Sumit Poudel"} cononical={cononical} frontmatter={article.data} >
     <section class="p-4 sm:pt-8 sm:px-12 pb-20 min-h-dvh">
         <Prose>
             <Content />

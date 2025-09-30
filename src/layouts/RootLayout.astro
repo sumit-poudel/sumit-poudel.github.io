@@ -4,10 +4,10 @@ import { Font } from "astro:assets";
 import { ClientRouter } from 'astro:transitions';
 import LoadingIndicator from "astro-loading-indicator/component"
 
-const { title, description } = Astro.props;
+const { title, description,cononical } = Astro.props;
 
 const defaultTitle = "Sumit Poudel";
-const defaultDescription = "Hello, I'm Sumit Poudel, a BCA student passionate about coding. Explore my portfolio, projects, and skills";
+const defaultDescription = "Hello, I'm Sumit Poudel, a BCA student of Birendra Multiple Campus who is passionate about coding and penguins. In love hate relationship with linux currently because of my ex NVIDIA LOl!. Explore my portfolio, projects, and skills";
 ---
 
 <!doctype html>
@@ -16,11 +16,12 @@ const defaultDescription = "Hello, I'm Sumit Poudel, a BCA student passionate ab
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image" href="/logo.png" />
+		{cononical && <link rel="cononical" href={cononical} />}
 		<meta name="generator" content={Astro.generator} />
 		<title>{title ?? defaultTitle}</title>
 		<meta name="description" content={description ?? defaultDescription} />
 
-		<meta property="og:url" content="https://sumit-poudel.com.np/" />
+		<meta property="og:url" content="https://www.sumit-poudel.com.np/" />
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content={defaultTitle} />
 		<meta property="og:description" content={defaultDescription} />
@@ -28,8 +29,8 @@ const defaultDescription = "Hello, I'm Sumit Poudel, a BCA student passionate ab
 
 		<!-- Twitter Meta Tags -->
 		<meta name="twitter:card" content="summary_large_image" />
-		<meta property="twitter:domain" content="nikola.fluidinterfaces.com" />
-		<meta property="twitter:url" content="https://sumit-poudel.com.np/" />
+		<meta property="twitter:domain" content="https://www.sumit-poudel.com.np" />
+		<meta property="twitter:url" content="https://www.sumit-poudel.com.np/" />
 		<meta name="twitter:title" content={defaultTitle} />
 		<meta name="twitter:description" content={defaultDescription} />
 		<meta name="twitter:image" content="/social-image.png" />

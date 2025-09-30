@@ -1,9 +1,10 @@
 ---
+import ExternalLink from "../components/external-link.astro";
 import H1 from "../components/h1.astro";
 import InfoLayout from "../layouts/InfoLayout.astro";
 ---
 
-<InfoLayout>
+<InfoLayout title="About | Sumit Poudel" cononical="https://www.sumit-poudel.com.np/about" >
      <div class="p-4 sm:pt-8 sm:px-12 pb-20 min-h-dvh flex flex-col justify-between gap-32">
           <div class="space-y-4 sm:space-y-12">
                <H1> Get to know Me </H1>
@@ -16,18 +17,33 @@ import InfoLayout from "../layouts/InfoLayout.astro";
                     <a href="https://bimc.tu.edu.np/" target="_blank" class="underline underline-offset-4 decoration-zinc-400 hover:text-zinc-50 hover:decoration-zinc-200">
                        birendra multiple campus.
                     </a>
-                    Current i am joined in BCA program for my bachelour. And penguins hate me &#128531;
+                    Current i am joined in BCA program for my bachelour. And current penguins hate me &#128531; because of my ex NVIDIA. <br> <br>
+                    I am passionate about learning anything that looks cool and fun, currently i am lil deep in the rabbit hole of web development.
+                    and also am the web engineer of a popular opensource club <ExternalLink href="https://bosc.org.np/">BOSC</ExternalLink>
                </p>
           </div>
 
           <div class="space-y-2 text-base sm:text-lg">
-               <h2 class="px-4 text-zinc-400 underline underline-offset-4 decoration-zinc-500">Achievements</h2>
 
+               <h2 class="px-4 text-zinc-400 underline underline-offset-4 decoration-zinc-500">Achievements</h2>
                <ul class="px-4 text-zinc-400 list-disc list-outside">
                     <li>wanna be fullstack developer</li>
                     <li>adaptable to new languages</li>
                     <li>i worked for subha fertility clinic</li>
+                    <li>web engineer for open source club</li>
                </ul>
+
+               <h2 class="px-4 mt-10 text-zinc-400 underline underline-offset-4 decoration-zinc-500">Languages & skills</h2>
+               <ul class="px-4 text-zinc-400 list-disc list-outside">
+                    <li>React</li>
+                    <li>Astro</li>
+                    <li>NextJS</li>
+                    <li>Java</li>
+                    <li>C</li>
+                    <li>Postgres</li>
+                    <li>i use arch btw</li>
+               </ul>
+
           </div>
      </div>
 </InfoLayout>
