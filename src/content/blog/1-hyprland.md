@@ -14,7 +14,7 @@ cover: https://en.wikipedia.org/wiki/Ui_Shigure#/media/File:Ui_Shigure.jpg
 
 ## From Chaos to Custom — My Hyprland Journey
 
-![oWtE girl.](https://raw.githubusercontent.com/sumit-poudel/dotfiles/main/assets/look.png)
+![oWtE girl.](https://raw.githubusercontent.com/sumit-poudel/dotfiles/main/assets/look2.png)
 
 When I first booted into **HyDE + Hyprland**, I had no clue how deep the rabbit hole went.  
 Everything looked barebones. No panels, no menus, no polish. Just a tiling compositor staring back at me.  
