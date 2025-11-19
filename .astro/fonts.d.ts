@@ -1,4 +1,4 @@
 declare module 'astro:assets' {
 	/** @internal */
-	export type FontFamily = (["--font-geist"])[number];
+	export type CssVariable = (["--font-geist"])[number];
 }
