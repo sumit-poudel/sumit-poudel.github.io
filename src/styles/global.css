@@ -2,6 +2,9 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
+  --font-mono: "Martian Mono", ui-monospace, SFMono-Regular, Menlo, Consolas,
+    monospace;
+
   --color-nvim-bg: #111111;
   --color-nvim-fg: #828282;
   --color-nvim-gray: #606060;
