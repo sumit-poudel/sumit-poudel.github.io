@@ -1,12 +1,12 @@
 ---
 title: "Hackathon Journey"
 date: 2025-10-05T00:00:00
-summary: 'Becoming 2nd Runner-Up with "humanSign" not your ordinary ai-detector.'
-author: "sumit"
+summary: "How my team built humanSign, an AI-text detector, and walked out of the hackathon as 2nd Runner-Up — plus what the judges actually rewarded."
+author: "Sumit Poudel"
 tags: ["wins"]
 ---
 
- ![Hackathon](/blogs/hackathon.jpg)
+ ![The hackathon venue where my team presented humanSign](/blogs/hackathon.jpg)
 
 The night before the actual Hackathon, It was intense knowing it will be a tough competation and i was hoping not to embarrce my self in front of all the judges and crowd.
 

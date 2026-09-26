@@ -1,14 +1,14 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="Session Closed">
-  <div class="h-screen grid grid-cols-3">
-    <div class="col-start-2 flex items-center justify-center">
-      <div class="text-center">
-        <h1 class="text-3xl font-bold mb-4 text-nvim-blue">Web Session Closed!</h1>
-        <p class="text-lg mb-2">Your web session has been successfully closed.</p>
-        <p class="text-lg">You can now safely close this tab.</p>
+<Layout title={`Session Closed — sumit poudel`} noindex>
+  <div class="grid min-h-full grid-cols-1 sm:grid-cols-3">
+    <div class="col-start-1 flex items-center justify-center sm:col-start-2">
+      <div class="max-w-full text-center">
+        <h1 class="mb-4 text-2xl font-bold break-words text-nvim-blue sm:text-3xl">Web Session Closed!</h1>
+        <p class="mb-2 text-base sm:text-lg">Your web session has been successfully closed.</p>
+        <p class="text-base sm:text-lg">You can now safely close this tab.</p>
       </div>
     </div>
   </div>

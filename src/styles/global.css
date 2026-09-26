@@ -13,8 +13,86 @@
   --color-nvim-statusline: #1c1c1c;
 }
 
-body {
-  @apply bg-nvim-bg text-nvim-fg font-mono;
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-nvim-bg text-nvim-fg font-mono;
+    /* A monospace font is ~0.6em per glyph, so long tokens (urls, emails,
+       slugs) overflow far more easily than in a proportional font. */
+    overflow-wrap: break-word;
+  }
+
+  /* Flex/grid children default to min-width:auto, which lets wide content push
+     a track past the viewport. opt every scroll container out of that. */
+  main,
+  article,
+  section,
+  header,
+  footer,
+  nav,
+  li {
+    min-width: 0;
+  }
+
+  a,
+  code,
+  kbd,
+  samp,
+  pre,
+  td,
+  th {
+    overflow-wrap: anywhere;
+  }
+
+  img,
+  video,
+  svg,
+  canvas,
+  iframe {
+    max-width: 100%;
+    height: auto;
+  }
+
+  pre {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  /* The prose plugin's 1.25rem default leaves ~25 characters per line in a
+     monospace face. Pull it back so lines stay readable. */
+  .prose {
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .prose :where(h1) {
+    font-size: 1.5em;
+  }
+
+  .prose :where(h2) {
+    font-size: 1.25em;
+  }
+
+  .prose :where(h3) {
+    font-size: 1.1em;
+  }
+
+  .prose pre,
+  .prose :where(code):not(:where([class~="not-prose"] *)) {
+    font-size: 0.8em;
+  }
 }
 
 #search-results [data-search-index].active {

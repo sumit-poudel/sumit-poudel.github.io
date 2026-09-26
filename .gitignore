@@ -27,3 +27,6 @@ dist-ssr
 *.sln
 *.sw?
 .env
+
+# bun is no longer used - package-lock.json is the lockfile
+bun.lock

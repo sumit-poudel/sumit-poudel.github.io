@@ -1,21 +1,14 @@
 ---
-// const pathname = Astro.url.pathname;
-// const isTildePage = pathname === '/' || pathname.split('/').filter(Boolean).length === 1;
-const isTildePage = true;
+const tildes = Array(200).fill('~');
 ---
 
-<div class="bg-nvim-bg text-nvim-gray w-6 flex-shrink-0 text-right pr-2">
-  {isTildePage ? (
-    <div class="h-full">
-      {Array(100).fill('~').map((line) => (
-        <div>{line}</div>
-      ))}
-    </div>
-  ) : (
-    <div class="h-full">
-      {Array(100).fill(0).map((_, index) => (
-        <div>{index + 1}</div>
-      ))}
-    </div>
-  )}
+<div
+  class="hidden sm:block bg-nvim-bg text-nvim-gray w-6 flex-shrink-0 text-right pr-2 select-none overflow-hidden"
+  aria-hidden="true"
+>
+  <div class="h-full">
+    {tildes.map((line) => (
+      <div>{line}</div>
+    ))}
+  </div>
 </div>

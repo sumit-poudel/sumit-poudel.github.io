@@ -1,8 +1,8 @@
 ---
-title: "oWtE"
+title: "oWtE: My First AUR Package"
 date: 2025-09-25T00:00:00
-summary: "This is more then just a repo for me."
-author: "sumit"
+summary: "What oWtE, my first AUR package, taught me about maintaining Arch Linux packages, PKGBUILDs and the wider AUR ecosystem."
+author: "Sumit Poudel"
 tags: ["repo"]
 ---
 
@@ -10,7 +10,7 @@ My first aur repo.
 
 Maybe my last as well.
 
-![oWtE girl.](https://raw.githubusercontent.com/sumit-poudel/oWtE/master/owte.gif)
+![oWtE, the AUR helper mascot, as an animated sticker](https://raw.githubusercontent.com/sumit-poudel/oWtE/master/owte.gif)
 
 ## Diving Into Arch With No Clue  
 

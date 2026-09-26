@@ -1,46 +1,147 @@
 ---
 import { getCollection, render } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
+import { AUTHOR, SITE, breadcrumbSchema, personSchema } from "../../consts";
 
 export async function getStaticPaths() {
 	const blogPosts = await getCollection("blog");
 	return blogPosts.map((post) => ({
 		params: { slug: post.id },
-		props: { post },
+		props: { post, posts: blogPosts },
 	}));
 }
 
-const { post } = Astro.props;
+const { post, posts } = Astro.props;
 const { Content } = await render(post);
+
+const site = Astro.site ?? new URL("https://www.sumit-poudel.com.np");
+const title = post.data.title;
+const description = post.data.summary ?? SITE.tagline;
+const tags = post.data.tags ?? [];
+const published = post.data.date;
+const canonical = new URL(`/blog/${post.id}`, site);
+
+const trail = [
+	{ name: "Home", path: "/" },
+	{ name: "Blog", path: "/blog/" },
+	{ name: title, path: `/blog/${post.id}/` },
+];
+
+const blogPosting = {
+	"@type": "BlogPosting",
+	"@id": canonical.href + "#post",
+	headline: title,
+	description,
+	image: [new URL(SITE.socialImage.path, site).href],
+	datePublished: published.toISOString(),
+	dateModified: published.toISOString(),
+	inLanguage: SITE.lang,
+	mainEntityOfPage: { "@type": "WebPage", "@id": canonical.href },
+	url: canonical.href,
+	keywords: tags.join(", "),
+	wordCount: post.body?.split(/\s+/).filter(Boolean).length ?? 0,
+	author: { "@id": new URL("/about/", site).href + "#person" },
+	publisher: { "@id": new URL("/about/", site).href + "#person" },
+	isPartOf: { "@id": site.href + "#website" },
+};
+
+const related = posts
+	.filter((entry) => entry.id !== post.id)
+	.map((entry) => ({
+		entry,
+		score:
+			(entry.data.tags ?? []).filter((tag) => tags.includes(tag)).length,
+	}))
+	.sort(
+		(a, b) =>
+			b.score - a.score ||
+			b.entry.data.date.valueOf() - a.entry.data.date.valueOf(),
+	)
+	.slice(0, 3);
 ---
 
-<Layout title={post.data.title}>
-  <div>
-    <article class="prose prose-invert max-w-none">
-      <h1>{post.data.title}</h1>
-      <p class="mt-2 flex flex-wrap gap-x-3 text-sm not-prose text-nvim-gray">
-        <time datetime={post.data.date.toISOString()}>
-          {post.data.date.toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "short",
-            day: "numeric",
-          })}
-        </time>
-        {post.data.author && <span>by {post.data.author}</span>}
-      </p>
-      {post.data.summary && (
-        <p class="mt-2 italic not-prose text-nvim-gray">{post.data.summary}</p>
-      )}
-      {post.data.tags && (
-        <p class="mt-2 flex flex-wrap gap-2 text-sm not-prose">
-          {post.data.tags.map((tag) => (
-            <a href={`/?tag=${encodeURIComponent(tag)}`} class="text-nvim-blue hover:underline">
-              #{tag}
-            </a>
-          ))}
-        </p>
-      )}
-      <Content />
-    </article>
-  </div>
+<Layout
+	title={`${title} — ${SITE.owner}`}
+	description={description}
+	ogType="article"
+	publishedTime={published}
+	tags={tags}
+	authorName={AUTHOR.name}
+	schema={[blogPosting, breadcrumbSchema(site, trail), personSchema(site)]}
+>
+	<nav aria-label="Breadcrumb" class="mb-3 text-xs text-nvim-gray">
+		<ol class="flex flex-wrap items-center gap-x-1">
+			{trail.map((crumb, index) => (
+				<li class="flex items-center gap-x-1">
+					{index > 0 && <span aria-hidden="true">/</span>}
+					{index === trail.length - 1 ? (
+						<span class="text-nvim-fg" aria-current="page">{crumb.name}</span>
+					) : (
+						<a href={crumb.path} class="hover:text-nvim-blue hover:underline">
+							{crumb.name}
+						</a>
+					)}
+				</li>
+			))}
+		</ol>
+	</nav>
+
+	<div class="max-w-full">
+		<article class="prose prose-invert max-w-none max-w-full break-words">
+			<h1 class="break-words">{title}</h1>
+			<p class="mt-2 flex flex-wrap gap-x-3 text-sm not-prose text-nvim-gray">
+				<time datetime={published.toISOString()}>
+					{published.toLocaleDateString("en-US", {
+						year: "numeric",
+						month: "long",
+						day: "numeric",
+					})}
+				</time>
+				{post.data.author && <span>by {post.data.author}</span>}
+				<span>{blogPosting.wordCount} words</span>
+			</p>
+			{post.data.summary && (
+				<p class="mt-2 italic not-prose text-nvim-gray">{post.data.summary}</p>
+			)}
+			{tags.length > 0 && (
+				<p class="mt-2 flex flex-wrap gap-2 text-sm not-prose">
+					{tags.map((tag) => (
+						<a
+							href={`/blog/?tag=${encodeURIComponent(tag)}`}
+							class="text-nvim-blue hover:underline"
+						>
+							#{tag}
+						</a>
+					))}
+				</p>
+			)}
+			<Content />
+		</article>
+
+		<aside class="mt-10 border-t border-nvim-gray/40 pt-4 not-prose">
+			<h2 class="text-sm uppercase tracking-wide text-nvim-gray">Keep reading</h2>
+			<ul class="mt-2 grid grid-cols-1 gap-3 sm:grid-cols-3">
+				{related.map(({ entry }) => (
+					<li class="min-w-0">
+						<a
+							href={`/blog/${entry.id}`}
+							class="block break-words text-nvim-blue hover:underline"
+						>
+							{entry.data.title}
+						</a>
+						<p class="mt-1 line-clamp-2 text-xs text-nvim-gray">
+							{entry.data.summary}
+						</p>
+					</li>
+				))}
+			</ul>
+			<p class="mt-4 text-sm">
+				<a href="/blog/" class="text-nvim-blue hover:underline">All posts</a>
+				<span class="text-nvim-gray"> · </span>
+				<a href="/about/" class="text-nvim-blue hover:underline">About</a>
+				<span class="text-nvim-gray"> · </span>
+				<a href="/contact/" class="text-nvim-blue hover:underline">Contact</a>
+			</p>
+		</aside>
+	</div>
 </Layout>

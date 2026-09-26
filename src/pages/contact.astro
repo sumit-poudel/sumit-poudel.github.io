@@ -1,5 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { AUTHOR, breadcrumbSchema, personSchema } from '../consts';
+
+const site = Astro.site ?? new URL('https://www.sumit-poudel.com.np');
+
+const trail = [
+  { name: 'Home', path: '/' },
+  { name: 'Contact', path: '/contact/' },
+];
 
 const channels = [
   { label: 'email', value: 'sumitpoudel.me@gmail.com', href: 'mailto:sumitpoudel.me@gmail.com' },
@@ -11,7 +19,11 @@ const channels = [
 ];
 ---
 
-<Layout title="Contact">
+<Layout
+  title={`Contact — ${AUTHOR.name}`}
+  description={`Get in touch with ${AUTHOR.name} — email, GitHub, X, Instagram and Facebook. Open to Go, web and Neovim work.`}
+  schema={[personSchema(site), breadcrumbSchema(site, trail)]}
+>
   <div class="max-w-3xl">
     <h1 class="text-2xl font-bold text-nvim-blue">Contact</h1>
     <p class="mt-1 text-nvim-green">version 1.0.0 (Arch/CachyOS)</p>
@@ -23,13 +35,13 @@ const channels = [
 
     <ul class="mt-6 flex flex-col gap-1">
       {channels.map((channel) => (
-        <li class="grid grid-cols-[8rem_1fr] gap-4">
+        <li class="grid grid-cols-1 gap-x-4 sm:grid-cols-[8rem_minmax(0,1fr)]">
           <span class="text-nvim-gray">{channel.label}</span>
           <a
             href={channel.href}
             target={channel.href.startsWith('mailto:') ? undefined : '_blank'}
             rel={channel.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
-            class="text-nvim-blue hover:underline"
+            class="min-w-0 break-all text-nvim-blue hover:underline"
           >
             {channel.value}
           </a>

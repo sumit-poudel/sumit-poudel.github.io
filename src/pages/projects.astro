@@ -1,19 +1,56 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import { SITE, breadcrumbSchema, personSchema } from '../consts';
 
 const projects = (await getCollection('projects')).sort(
   (a, b) =>
     (a.data.order ?? 99) - (b.data.order ?? 99) ||
     a.data.title.localeCompare(b.data.title)
 );
+
+const site = Astro.site ?? new URL('https://www.sumit-poudel.com.np');
+const description = `Things I build: ${projects
+  .map((project) => project.data.title)
+  .join(', ')} — Go language servers, Astro sites and Arch Linux tooling.`;
+
+const trail = [
+  { name: 'Home', path: '/' },
+  { name: 'Projects', path: '/projects/' },
+];
+
+const itemList = {
+  '@type': 'ItemList',
+  '@id': new URL('/projects/', site).href + '#list',
+  name: 'Projects',
+  numberOfItems: projects.length,
+  itemListElement: projects.map((project, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: project.data.title,
+    ...(project.data.link
+      ? { url: project.data.link }
+      : { url: new URL('/projects/', site).href }),
+  })),
+};
 ---
 
-<Layout title="Projects">
+<Layout
+  title={`Projects — Go, Web & Linux Builds | ${SITE.owner}`}
+  description={description}
+  schema={[itemList, breadcrumbSchema(site, trail), personSchema(site)]}
+>
+  <header class="mb-6">
+    <h1 class="text-2xl font-bold text-nvim-blue sm:text-3xl">Projects</h1>
+    <p class="mt-1 text-nvim-gray">
+      {projects.length} build{projects.length === 1 ? '' : 's'} — Go, web and Arch Linux tooling.
+    </p>
+  </header>
+
   <ul id="projects-list">
     {projects.map((project, index) => (
       <li
-        class="project-item list-item mb-4 -mx-2 px-2 py-0.5 rounded-sm grid grid-cols-[2fr_3fr_1fr] gap-4 items-start"
+        class="project-item list-item mb-4 -mx-2 px-2 py-0.5 rounded-sm grid grid-cols-1 gap-1 sm:grid-cols-[minmax(0,2fr)_minmax(0,3fr)_auto] sm:gap-4 items-start"
         data-index={index}
         data-href={project.data.link}
       >
@@ -21,7 +58,7 @@ const projects = (await getCollection('projects')).sort(
           href={project.data.link}
           target={project.data.link?.startsWith('http') ? '_blank' : undefined}
           rel={project.data.link?.startsWith('http') ? 'noopener noreferrer' : undefined}
-          class="text-nvim-blue hover:underline font-semibold"
+          class="text-nvim-blue hover:underline font-semibold break-words min-w-0"
         >
           {project.data.title}
         </a>
@@ -30,7 +67,7 @@ const projects = (await getCollection('projects')).sort(
             {project.data.summary}
           </p>
           {project.data.tags && (
-            <p class="mt-1 text-xs text-nvim-blue/70">
+            <p class="mt-1 text-xs text-nvim-blue/70 break-words">
               {project.data.tags.map((tag) => `#${tag}`).join('  ')}
             </p>
           )}
@@ -40,7 +77,7 @@ const projects = (await getCollection('projects')).sort(
             href={project.data.link}
             target={project.data.link.startsWith('http') ? '_blank' : undefined}
             rel={project.data.link.startsWith('http') ? 'noopener noreferrer' : undefined}
-            class="text-nvim-fg text-sm whitespace-nowrap hover:underline"
+            class="text-nvim-fg text-sm whitespace-nowrap hover:underline sm:justify-self-end"
           >
             {project.data.link.startsWith('http') ? '↗ site' : '→ write-up'}
           </a>

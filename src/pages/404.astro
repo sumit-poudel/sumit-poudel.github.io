@@ -2,13 +2,13 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="No Such Buffer">
-  <div class="h-screen grid grid-cols-3">
-    <div class="col-start-2 flex items-center justify-center">
-      <div class="text-center">
-        <h1 class="text-3xl font-bold mb-4 text-nvim-blue">E492: Not an editor command</h1>
-        <p class="text-lg mb-2">No such buffer.</p>
-        <p class="text-lg">The page you asked for is not in this file.</p>
+<Layout title="404 — No Such Buffer" noindex>
+  <div class="grid min-h-full grid-cols-1 sm:grid-cols-3">
+    <div class="col-start-1 flex items-center justify-center sm:col-start-2">
+      <div class="max-w-full text-center">
+        <h1 class="mb-4 text-2xl font-bold break-words text-nvim-blue sm:text-3xl">E492: Not an editor command</h1>
+        <p class="mb-2 text-base sm:text-lg">No such buffer.</p>
+        <p class="text-base sm:text-lg">The page you asked for is not in this file.</p>
         <p class="mt-4 text-nvim-gray">Use <span class="text-nvim-blue">:q</span> to close the tab.</p>
       </div>
     </div>

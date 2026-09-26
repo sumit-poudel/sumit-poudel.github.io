@@ -1,12 +1,12 @@
 ---
-title: "hyprland"
+title: "My Hyprland Journey: From Chaos to Custom"
 date: 2025-09-26T00:00:00
-summary: "From Chaos to Custom — My Hyprland Journey"
-author: "sumit"
+summary: "From a barebones HyDE + Hyprland install to a fully tiled, dotfile-driven desktop: the configs, keybinds and window rules I fought along the way."
+author: "Sumit Poudel"
 tags: ["linux"]
 ---
 
-![oWtE girl.](https://raw.githubusercontent.com/sumit-poudel/dotfiles/main/assets/look2.png)
+![A fully tiled Hyprland desktop running my dotfiles, with oWtE artwork on the wallpaper](https://raw.githubusercontent.com/sumit-poudel/dotfiles/main/assets/look2.png)
 
 When I first booted into **HyDE + Hyprland**, I had no clue how deep the rabbit hole went.  
 Everything looked barebones. No panels, no menus, no polish. Just a tiling compositor staring back at me.  

@@ -1,38 +1,50 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { AUTHOR, breadcrumbSchema } from '../consts';
+
+const site = Astro.site ?? new URL('https://www.sumit-poudel.com.np');
+
+const trail = [
+  { name: 'Home', path: '/' },
+  { name: 'Help', path: '/help/' },
+];
 ---
 
-<Layout title="Help">
-  <div class="flex flex-col items-center justify-center h-full">
-    <h1 class="text-4xl font-bold mb-8 text-nvim-blue">Help page</h1>
+<Layout
+  title={`Help & shortcuts — ${AUTHOR.name}`}
+  description={`Keyboard shortcuts and commands for ${AUTHOR.name}'s site: how to search, browse posts and projects, and navigate with vim key bindings.`}
+  schema={[breadcrumbSchema(site, trail)]}
+>
+  <div class="flex min-h-full flex-col items-center justify-center py-4 sm:py-0">
+    <h1 class="mb-4 text-2xl font-bold text-nvim-blue sm:mb-8 sm:text-4xl">Help page</h1>
     <div class="text-center">
       <p class="mb-4">version 0.0.3</p>
-      <div class="flex flex-col text-left justify-left p-10">
-        <p class="p-4">
-            This page contains basic instructions to use this page. Some Vim key bindings are enabled and can be used within the 
+      <div class="flex w-full max-w-full flex-col text-left p-1 sm:p-10">
+        <p class="p-1 sm:p-4">
+            This page contains basic instructions to use this page. Some Vim key bindings are enabled and can be used within the
             page itself, but some of them don't work in all the pages since I did not considered it necessary.
         </p>
 
-        <h2 class="p-4 text-2xl font-bold text-nvim-blue">Instructions</h2>
-        <p class="ml-4"><a class="font-bold">h</a>/<a class="font-bold">l</a>: Back / forward in history.</p>
-        <p class="ml-4"><a class="font-bold">j</a>: Move the cursor down one line.</p>
-        <p class="ml-4"><a class="font-bold">k</a>: Move the cursor up one line.</p>
-        <p class="ml-4"><a class="font-bold">g</a>: Move the cursor to the first line of the file, in this case, page.</p>
-        <p class="ml-4"><a class="font-bold">G</a>: Move the cursor to the last line of the file, in this case, page.</p>
-        <p class="ml-4"><a class="font-bold">:&lt;command&gt;</a>: Executes a command: <a class="font-bold">:blog</a>, <a class="font-bold">:projects</a>, <a class="font-bold">:about</a>, <a class="font-bold">:contact</a>, <a class="font-bold">:h</a>, <a class="font-bold">:q</a>. Commands are suggested above the status bar as you type, <a class="font-bold">Tab</a> completes the highlighted one and <a class="font-bold">Enter</a> runs it.</p>
-        <p class="ml-4"><a class="font-bold">/</a>: Searches from the command line. Suggestions appear above the status bar as you type: matching posts, word completions, tags and your recent searches.</p>
-        <p class="ml-4 ml-8"><a class="font-bold">Tab</a>: Completes the highlighted suggestion in the command line.</p>
-        <p class="ml-8"><a class="font-bold">j</a>/<a class="font-bold">k</a>: Move through suggestions and results.</p>
-        <p class="ml-8"><a class="font-bold">Enter</a>: Opens the highlighted post.</p>
-        <p class="ml-8"><a class="font-bold">Esc</a>: Closes the suggestions.</p>
-        <p class="ml-4"><a class="font-bold">tag:name</a> or <a class="font-bold">#name</a>: Filters the results by tag, e.g. <a class="font-bold">tag:vim</a>.</p>
+        <h2 class="p-1 text-xl font-bold text-nvim-blue sm:p-4 sm:text-2xl">Instructions</h2>
+        <p class="ml-1 sm:ml-4"><a class="font-bold">h</a>/<a class="font-bold">l</a>: Back / forward in history.</p>
+        <p class="ml-1 sm:ml-4"><a class="font-bold">j</a>: Move the cursor down one line.</p>
+        <p class="ml-1 sm:ml-4"><a class="font-bold">k</a>: Move the cursor up one line.</p>
+        <p class="ml-1 sm:ml-4"><a class="font-bold">g</a>: Move the cursor to the first line of the file, in this case, page.</p>
+        <p class="ml-1 sm:ml-4"><a class="font-bold">G</a>: Move the cursor to the last line of the file, in this case, page.</p>
+        <p class="ml-1 sm:ml-4"><a class="font-bold">:&lt;command&gt;</a>: Executes a command: <a class="font-bold">:blog</a>, <a class="font-bold">:projects</a>, <a class="font-bold">:about</a>, <a class="font-bold">:contact</a>, <a class="font-bold">:h</a>, <a class="font-bold">:q</a>. Commands are suggested above the status bar as you type, <a class="font-bold">Tab</a> completes the highlighted one and <a class="font-bold">Enter</a> runs it.</p>
+        <p class="ml-1 sm:ml-4"><a class="font-bold">/</a>: Searches from the command line. Suggestions appear above the status bar as you type: matching posts, word completions, tags and your recent searches.</p>
+        <p class="ml-1 sm:ml-8"><a class="font-bold">Tab</a>: Completes the highlighted suggestion in the command line.</p>
+        <p class="ml-2 sm:ml-8"><a class="font-bold">j</a>/<a class="font-bold">k</a>: Move through suggestions and results.</p>
+        <p class="ml-2 sm:ml-8"><a class="font-bold">Enter</a>: Opens the highlighted post.</p>
+        <p class="ml-2 sm:ml-8"><a class="font-bold">Esc</a>: Closes the suggestions.</p>
+        <p class="ml-1 sm:ml-4"><a class="font-bold">tag:name</a> or <a class="font-bold">#name</a>: Filters the results by tag, e.g. <a class="font-bold">tag:vim</a>.</p>
 
-        <h2 class="p-4 text-2xl font-bold text-nvim-blue">Lists</h2>
-        <p class="ml-4">Applies to <a class="font-bold">:blog</a> and <a class="font-bold">:projects</a>.</p>
-        <p class="ml-4"><a class="font-bold">j</a>/<a class="font-bold">k</a>: Move the cursor between items, the highlighted row is shown in the status bar as <a class="font-bold">n/total</a>.</p>
-        <p class="ml-4"><a class="font-bold">Enter</a>: Opens the highlighted item.</p>
-        <p class="ml-4"><a class="font-bold">g</a>/<a class="font-bold">G</a>: Jump to the first / last item.</p>
-        <p class="ml-4"><a class="font-bold">h</a>/<a class="font-bold">l</a>: Back / forward in history.</p>
+        <h2 class="p-1 text-xl font-bold text-nvim-blue sm:p-4 sm:text-2xl">Lists</h2>
+        <p class="ml-1 sm:ml-4">Applies to <a class="font-bold">:blog</a> and <a class="font-bold">:projects</a>.</p>
+        <p class="ml-1 sm:ml-4"><a class="font-bold">j</a>/<a class="font-bold">k</a>: Move the cursor between items, the highlighted row is shown in the status bar as <a class="font-bold">n/total</a>.</p>
+        <p class="ml-1 sm:ml-4"><a class="font-bold">Enter</a>: Opens the highlighted item.</p>
+        <p class="ml-1 sm:ml-4"><a class="font-bold">g</a>/<a class="font-bold">G</a>: Jump to the first / last item.</p>
+        <p class="ml-1 sm:ml-4"><a class="font-bold">h</a>/<a class="font-bold">l</a>: Back / forward in history.</p>
       </div>
     </div>
   </div>
