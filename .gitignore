@@ -14,6 +14,7 @@ dist-ssr
 .astro
 .vercel
 .output
+.wrangler
 
 # Editor directories and files
 .vscode/*

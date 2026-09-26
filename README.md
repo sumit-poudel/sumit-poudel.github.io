@@ -44,10 +44,24 @@ Blog posts and projects are markdown files with frontmatter validated by
 bun install
 bun run dev     # http://localhost:4321
 bun run build   # astro check && astro build
+bun run deploy  # build, then wrangler deploy
 ```
 
-Deployed to Vercel with `@astrojs/vercel` and `output: "server"`, so pages are
-rendered per request rather than prerendered.
+## Deploying
+
+Static. Every page is prerendered at build time into `dist/`, so there is no
+adapter and no server — the search index is just a prerendered
+`dist/api/blog-posts.json`.
+
+`wrangler.jsonc` uploads `dist/` as Workers static assets. It has no `main`
+field, because there is no worker code to run; `not_found_handling` points
+missing paths at the prerendered `404.html`.
+
+On Cloudflare, set the build command to `bun run build` and leave the deploy
+command at the default `npx wrangler deploy`. One catch: the build image ships
+bun 1.2.15, which cannot read the `lockfileVersion: 2` lockfile that bun 1.4
+writes. Add `BUN_VERSION=1.4.2` under **Settings → Build → Build variables**,
+otherwise the install step fails with "Unknown lockfile version".
 
 ## Branches
 
