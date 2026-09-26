@@ -289,3 +289,12 @@ function navigateUp() {
 function navigateDown() {
 	window.history.forward();
 }
+
+function openSearchWithQuery(query: string) {
+	currentMode = "SEARCH";
+	commandBuffer = `/${query}`;
+	window.updateStatusBar(currentMode, commandBuffer);
+	window.refreshPalette?.(commandBuffer);
+}
+
+window.openSearchWithQuery = openSearchWithQuery;

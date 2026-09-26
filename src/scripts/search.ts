@@ -662,9 +662,24 @@ function closePalette(): void {
 	if (results) results.replaceChildren();
 }
 
+function deepLinkedTag(): string | null {
+	const tag = new URLSearchParams(window.location.search).get("tag");
+	const trimmed = tag?.trim();
+	return trimmed ? trimmed : null;
+}
+
 document.addEventListener("DOMContentLoaded", () => {
 	loadHistory();
 	fetchBlogPosts().then(() => {
+		const tag = deepLinkedTag();
+		if (tag) {
+			if (window.openSearchWithQuery) {
+				window.openSearchWithQuery(`tag:${tag}`);
+			} else {
+				performSearch(`tag:${tag}`);
+			}
+			return;
+		}
 		if (isVisible()) render();
 	});
 });
