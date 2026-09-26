@@ -1,0 +1,44 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const channels = [
+  { label: 'email', value: 'sumitpoudel.me@gmail.com', href: 'mailto:sumitpoudel.me@gmail.com' },
+  { label: 'proton', value: 'sumitpoudel@proton.me', href: 'mailto:sumitpoudel@proton.me' },
+  { label: 'github', value: 'github.com/sumit-poudel', href: 'https://github.com/sumit-poudel/' },
+  { label: 'x', value: '@sum_itpoudel', href: 'https://x.com/sum_itpoudel/' },
+  { label: 'instagram', value: 'super.user.d0', href: 'https://instagram.com/super.user.d0/' },
+  { label: 'facebook', value: 'super.user.d0', href: 'https://www.facebook.com/super.user.d0/' },
+];
+---
+
+<Layout title="Contact">
+  <div class="max-w-3xl">
+    <h1 class="text-2xl font-bold text-nvim-blue">Contact</h1>
+    <p class="mt-1 text-nvim-green">version 1.0.0 (Arch/CachyOS)</p>
+
+    <p class="mt-6">
+      Interested in working together? Reach out for new projects, experiments, or a chat about
+      Arch, Neovim and Go.
+    </p>
+
+    <ul class="mt-6 flex flex-col gap-1">
+      {channels.map((channel) => (
+        <li class="grid grid-cols-[8rem_1fr] gap-4">
+          <span class="text-nvim-gray">{channel.label}</span>
+          <a
+            href={channel.href}
+            target={channel.href.startsWith('mailto:') ? undefined : '_blank'}
+            rel={channel.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+            class="text-nvim-blue hover:underline"
+          >
+            {channel.value}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <p class="mt-8 text-nvim-gray">
+      Basanta Chowk, Chitwan, Bharatput-18, Nepal
+    </p>
+  </div>
+</Layout>

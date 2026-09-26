@@ -1,0 +1,37 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const blogPosts = (await getCollection('blog')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+---
+
+<Layout title="Blog">
+  <ul id="blog-list">
+    {blogPosts.map((post, index) => (
+      <li
+        class="blog-item list-item mb-4 -mx-2 px-2 py-0.5 rounded-sm grid grid-cols-[2fr_3fr_1fr] gap-4 items-start"
+        data-index={index}
+        data-href={`/blog/${post.id}`}
+      >
+        <a href={`/blog/${post.id}`} class="text-nvim-blue hover:underline font-semibold">
+          {post.data.title}
+        </a>
+        <div class="min-w-0">
+          <p class="text-nvim-gray line-clamp-2">
+            {post.data.summary}
+          </p>
+          {post.data.tags && (
+            <p class="mt-1 text-xs text-nvim-blue/70">
+              {post.data.tags.map((tag) => `#${tag}`).join('  ')}
+            </p>
+          )}
+        </div>
+        <time datetime={post.data.date.toISOString()} class="text-nvim-fg text-sm whitespace-nowrap">
+          {post.data.date.toLocaleDateString('en-US', {year: 'numeric', month: 'short', day: 'numeric'})}
+        </time>
+      </li>
+    ))}
+  </ul>
+</Layout>

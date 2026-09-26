@@ -1,0 +1,51 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --color-nvim-bg: #111111;
+  --color-nvim-fg: #828282;
+  --color-nvim-gray: #606060;
+  --color-nvim-blue: #e99696;
+  --color-nvim-green: #aaaaaa;
+  --color-nvim-statusline: #1c1c1c;
+}
+
+body {
+  @apply bg-nvim-bg text-nvim-fg font-mono;
+}
+
+#search-results [data-search-index].active {
+  @apply bg-nvim-blue/20;
+}
+
+#blog-list .list-item,
+#projects-list .list-item {
+  @apply cursor-pointer transition-colors;
+}
+
+#blog-list .list-item:hover,
+#projects-list .list-item:hover {
+  @apply bg-nvim-blue/10;
+}
+
+#blog-list .list-item.active,
+#projects-list .list-item.active {
+  @apply bg-nvim-blue/20;
+}
+
+#blog-list .list-item.active a,
+#projects-list .list-item.active a {
+  @apply underline;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-nvim-bg;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-nvim-gray rounded;
+}

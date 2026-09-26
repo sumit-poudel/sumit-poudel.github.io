@@ -1,0 +1,51 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const projects = (await getCollection('projects')).sort(
+  (a, b) =>
+    (a.data.order ?? 99) - (b.data.order ?? 99) ||
+    a.data.title.localeCompare(b.data.title)
+);
+---
+
+<Layout title="Projects">
+  <ul id="projects-list">
+    {projects.map((project, index) => (
+      <li
+        class="project-item list-item mb-4 -mx-2 px-2 py-0.5 rounded-sm grid grid-cols-[2fr_3fr_1fr] gap-4 items-start"
+        data-index={index}
+        data-href={project.data.link}
+      >
+        <a
+          href={project.data.link}
+          target={project.data.link?.startsWith('http') ? '_blank' : undefined}
+          rel={project.data.link?.startsWith('http') ? 'noopener noreferrer' : undefined}
+          class="text-nvim-blue hover:underline font-semibold"
+        >
+          {project.data.title}
+        </a>
+        <div class="min-w-0">
+          <p class="text-nvim-gray line-clamp-2">
+            {project.data.summary}
+          </p>
+          {project.data.tags && (
+            <p class="mt-1 text-xs text-nvim-blue/70">
+              {project.data.tags.map((tag) => `#${tag}`).join('  ')}
+            </p>
+          )}
+        </div>
+        {project.data.link && (
+          <a
+            href={project.data.link}
+            target={project.data.link.startsWith('http') ? '_blank' : undefined}
+            rel={project.data.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+            class="text-nvim-fg text-sm whitespace-nowrap hover:underline"
+          >
+            {project.data.link.startsWith('http') ? '↗ site' : '→ write-up'}
+          </a>
+        )}
+      </li>
+    ))}
+  </ul>
+</Layout>
